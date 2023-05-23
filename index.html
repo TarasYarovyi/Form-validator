@@ -4,7 +4,49 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Form validator</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@400;700&display=swap"
+    />
+    <link rel="stylesheet" href="" />
   </head>
-  <body></body>
+  <body>
+    <div class="wrapper">
+      <form>
+        <h1>Sign up!</h1>
+
+        <div class="form-box">
+          <label for="username">Username:</label>
+          <input type="text" id="username" placeholder="Enter username" />
+          <p class="error">error</p>
+        </div>
+        <div class="form-box">
+          <label for="password">Password:</label>
+          <input type="password" id="password" placeholder="Enter password" />
+          <p class="error">error</p>
+        </div>
+        <div class="form-box">
+          <label for="password2">Repead Password:</label>
+          <input type="password" id="password2" placeholder="Repead Password" />
+          <p class="error">error</p>
+        </div>
+        <div class="form-box">
+          <label for="email">Enter email:</label>
+          <input type="email" id="email" placeholder="Enter email" />
+          <p class="error">error</p>
+        </div>
+        <div class="control-buttons">
+          <but class="clear">Clear</but>
+          <but class="send">Send</but>
+        </div>
+        <div class="popup">
+          <p>The form has been successfully sent</p>
+          <button class="close">Close</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>
