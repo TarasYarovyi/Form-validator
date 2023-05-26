@@ -8,14 +8,27 @@ const clear = document.querySelector(".clear");
 const popup = document.querySelector(".popup");
 const formBoxes = document.querySelectorAll("input");
 
-clear.addEventListener("click", (e) => {
+clear.addEventListener("click", clearForm);
+send.addEventListener("click", checkForm);
+
+function clearForm(e) {
   e.preventDefault();
-  formBoxes.forEach((box) => {
-    box.value = "";
+
+  formBoxes.forEach((formBox) => {
+    formBox.value = "";
+    formBox.parentElement.classList.remove("error");
   });
-  //   username.value = "";
-  //   password.value = "";
-  //   password2.value = "";
-  //   email.value = "";
-  //   console.log(username.value);
-});
+}
+
+function checkForm(e) {
+  e.preventDefault();
+  formBoxes.forEach((formBox) => {
+    if (formBox.value === "") {
+      formBox.parentElement.classList.add("error");
+    } else {
+      formBox.parentElement.classList.remove("error");
+    }
+  });
+}
+
+function showError(formBox, message) {}
