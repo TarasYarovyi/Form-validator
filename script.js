@@ -24,11 +24,26 @@ function checkForm(e) {
   e.preventDefault();
   formBoxes.forEach((formBox) => {
     if (formBox.value === "") {
-      formBox.parentElement.classList.add("error");
+      showError(formBox, formBox.placeholder);
+    } else if (formBox.type === "text" && formBox.value.length < 5) {
+      showError(formBox, "Too short name");
+    } else if (formBox.type === "password" && formBox.value.length < 8) {
+      showError(formBox, "Too short password");
+    } else if (formBox.type === "email" && formBox.value.length < 5) {
+      showError(formBox, "Too short email");
     } else {
       formBox.parentElement.classList.remove("error");
     }
   });
 }
 
-function showError(formBox, message) {}
+function showError(input, message) {
+  const formBox = input.parentElement;
+  formBox.querySelector(".error-text").textContent = message;
+  formBox.classList.add("error");
+}
+function checkLength(input, min) {
+  if (input.checkLength < min) {
+    showError(input, "Please complete");
+  }
+}
