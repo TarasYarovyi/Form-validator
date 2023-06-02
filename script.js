@@ -23,16 +23,19 @@ function clearForm(e) {
 function checkForm(e) {
   e.preventDefault();
   formBoxes.forEach((formBox) => {
-    if (formBox.value === "") {
-      showError(formBox, formBox.placeholder);
-    } else if (formBox.type === "text" && formBox.value.length < 5) {
-      showError(formBox, "Too short name");
-    } else if (formBox.type === "password" && formBox.value.length < 8) {
-      showError(formBox, "Too short password");
-    } else if (formBox.type === "email" && formBox.value.length < 5) {
-      showError(formBox, "Too short email");
-    } else {
-      formBox.parentElement.classList.remove("error");
+    switch (formBox.className) {
+      case "username":
+        checkLength(formBox, 5);
+        break;
+      case "password":
+        checkLength(formBox, 5);
+        break;
+      case "email":
+        checkLength(formBox, 5);
+        break;
+      default:
+        console.error("input checking error");
+        break;
     }
   });
 }
@@ -43,7 +46,11 @@ function showError(input, message) {
   formBox.classList.add("error");
 }
 function checkLength(input, min) {
-  if (input.checkLength < min) {
-    showError(input, "Please complete");
+  if (input.value === "") {
+    showError(input, input.placeholder);
+  } else if (input.value.length < min) {
+    showError(input, `Too short ${input.id}`);
+  } else {
+    input.parentElement.classList.remove("error");
   }
 }
