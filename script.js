@@ -29,9 +29,12 @@ function checkForm(e) {
         break;
       case "password":
         checkLength(formBox, 5);
+        checkPassword(formBox, document.querySelector("#password"));
         break;
       case "email":
         checkLength(formBox, 5);
+        checkEmail(formBox);
+
         break;
       default:
         console.error("input checking error");
@@ -45,6 +48,7 @@ function showError(input, message) {
   formBox.querySelector(".error-text").textContent = message;
   formBox.classList.add("error");
 }
+
 function checkLength(input, min) {
   if (input.value === "") {
     showError(input, input.placeholder);
@@ -52,5 +56,20 @@ function checkLength(input, min) {
     showError(input, `Too short ${input.id}`);
   } else {
     input.parentElement.classList.remove("error");
+  }
+}
+
+function checkPassword(currentPassword, firstPassword) {
+  if (currentPassword.value !== firstPassword.value) {
+    showError(currentPassword, "Passwords must be the same");
+  }
+}
+
+function checkEmail(email) {
+  const regexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  if (!regexp.test(email.value)) {
+    showError(email, "Wrong email");
+  } else {
+    email.parentElement.classList.remove("error");
   }
 }
