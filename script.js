@@ -34,13 +34,15 @@ function checkForm(e) {
       case "email":
         checkLength(formBox, 5);
         checkEmail(formBox);
-
         break;
       default:
         console.error("input checking error");
         break;
     }
   });
+  if (document.querySelectorAll(".error")[0]) {
+    popup.style.display = "none";
+  }
 }
 
 function showError(input, message) {
