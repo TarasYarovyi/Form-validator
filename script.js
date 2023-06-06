@@ -7,13 +7,14 @@ const send = document.querySelector(".send");
 const clear = document.querySelector(".clear");
 const popup = document.querySelector(".popup");
 const formBoxes = document.querySelectorAll("input");
+const close = document.querySelector(".close");
 
 clear.addEventListener("click", clearForm);
+close.addEventListener("click", clearForm);
 send.addEventListener("click", checkForm);
 
-function clearForm(e) {
-  e.preventDefault();
-
+function clearForm() {
+  popup.style.display = "hidden";
   formBoxes.forEach((formBox) => {
     formBox.value = "";
     formBox.parentElement.classList.remove("error");
@@ -25,14 +26,14 @@ function checkForm(e) {
   formBoxes.forEach((formBox) => {
     switch (formBox.className) {
       case "username":
-        checkLength(formBox, 5);
+        checkLength(formBox, 2);
         break;
       case "password":
-        checkLength(formBox, 5);
+        checkLength(formBox, 2);
         checkPassword(formBox, document.querySelector("#password"));
         break;
       case "email":
-        checkLength(formBox, 5);
+        checkLength(formBox, 2);
         checkEmail(formBox);
         break;
       default:
@@ -41,7 +42,10 @@ function checkForm(e) {
     }
   });
   if (document.querySelectorAll(".error")[0]) {
-    popup.style.display = "none";
+    popup.style.display = "hidden";
+  } else {
+    popup.style.visibility = "visible";
+    clearForm();
   }
 }
 
