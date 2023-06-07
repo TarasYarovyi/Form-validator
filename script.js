@@ -37,16 +37,14 @@ function checkForm(e) {
         break;
     }
   });
-  if (document.querySelectorAll(".error")[0]) {
-    popup.style.display = "hidden";
-  } else {
-    popup.style.visibility = "visible";
-    clearForm();
+  if (!document.querySelectorAll(".error")[0]) {
+    popup.classList.add("show-popup");
   }
 }
 
-function clearForm() {
-  popup.style.display = "hidden";
+function clearForm(e) {
+  e.preventDefault();
+  popup.classList.remove("show-popup");
   formBoxes.forEach((formBox) => {
     formBox.value = "";
     formBox.parentElement.classList.remove("error");
@@ -68,7 +66,7 @@ function hideError(checkingFunction, formBox) {
 function checkLength(input) {
   if (input.value === "") {
     showError(input, input.placeholder);
-  } else if (input.value.length < 2) {
+  } else if (input.value.length < 5) {
     showError(input, `Too short ${input.className}`);
   } else {
     input.parentElement.classList.remove("error");

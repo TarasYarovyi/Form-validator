@@ -98,8 +98,8 @@ h1 {
     background-color: #fff;
     border-radius: 3px;
     border: 2px solid black;
-    /* transition: top .3s; */
-    visibility: hidden;
+    transition: top .5s;
+    
 
 
 }
