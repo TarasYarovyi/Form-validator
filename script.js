@@ -1,39 +1,35 @@
 "use strict";
 const username = document.querySelector("#username");
 const password = document.querySelector("#password");
-const password2 = document.querySelector("#password2");
+const password2 = document.querySelector("#second-password");
 const email = document.querySelector("#email");
 const send = document.querySelector(".send");
 const clear = document.querySelector(".clear");
+const close = document.querySelector(".close");
 const popup = document.querySelector(".popup");
 const formBoxes = document.querySelectorAll("input");
-const close = document.querySelector(".close");
 
 clear.addEventListener("click", clearForm);
 close.addEventListener("click", clearForm);
 send.addEventListener("click", checkForm);
-
-function clearForm() {
-  popup.style.display = "hidden";
-  formBoxes.forEach((formBox) => {
-    formBox.value = "";
-    formBox.parentElement.classList.remove("error");
-  });
-}
+username.onkeyup = () => hideError(checkLength, username);
+password.onkeyup = () => hideError(checkLength, password);
+password2.onkeyup = () => hideError(checkLength, password2);
+email.onkeyup = () => hideError(checkEmail, email);
 
 function checkForm(e) {
   e.preventDefault();
   formBoxes.forEach((formBox) => {
     switch (formBox.className) {
       case "username":
-        checkLength(formBox, 2);
+        checkLength(formBox);
         break;
       case "password":
-        checkLength(formBox, 2);
+        checkLength(formBox);
         checkPassword(formBox, document.querySelector("#password"));
         break;
       case "email":
-        checkLength(formBox, 2);
+        checkLength(formBox);
         checkEmail(formBox);
         break;
       default:
@@ -49,17 +45,31 @@ function checkForm(e) {
   }
 }
 
+function clearForm() {
+  popup.style.display = "hidden";
+  formBoxes.forEach((formBox) => {
+    formBox.value = "";
+    formBox.parentElement.classList.remove("error");
+  });
+}
+
 function showError(input, message) {
   const formBox = input.parentElement;
   formBox.querySelector(".error-text").textContent = message;
   formBox.classList.add("error");
 }
 
-function checkLength(input, min) {
+function hideError(checkingFunction, formBox) {
+  if (formBox.parentElement.classList.contains("error")) {
+    checkingFunction(formBox);
+  }
+}
+
+function checkLength(input) {
   if (input.value === "") {
     showError(input, input.placeholder);
-  } else if (input.value.length < min) {
-    showError(input, `Too short ${input.id}`);
+  } else if (input.value.length < 2) {
+    showError(input, `Too short ${input.className}`);
   } else {
     input.parentElement.classList.remove("error");
   }
