@@ -1,4 +1,5 @@
 "use strict";
+
 const username = document.querySelector("#username");
 const password = document.querySelector("#password");
 const password2 = document.querySelector("#second-password");
@@ -12,7 +13,13 @@ const formBoxes = document.querySelectorAll("input");
 clear.addEventListener("click", clearForm);
 close.addEventListener("click", clearForm);
 send.addEventListener("click", checkForm);
-username.onkeyup = () => hideError(checkLength, username);
+username.onkeyup = () => {
+  hideError(checkLength, username);
+
+  if (event.keyCode === 13) {
+    password.focus();
+  }
+};
 password.onkeyup = () => hideError(checkLength, password);
 password2.onkeyup = () => hideError(checkLength, password2);
 email.onkeyup = () => hideError(checkEmail, email);
